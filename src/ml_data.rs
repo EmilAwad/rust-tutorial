@@ -31,10 +31,10 @@ pub struct TreeNode {
 #[derive(Debug, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct MLDataContainer {
-    element_statistics: MLData,
+    pub element_statistics: MLData,
 }
 
-fn read_ml_json(path: &Path) -> MLDataContainer{
+pub fn read_ml_json(path: &Path) -> MLDataContainer{
 
     let json_str = fs::read_to_string(path).unwrap();
 
@@ -95,13 +95,13 @@ mod test{
         let p: Person = serde_json::from_str(data).unwrap();
 
         // Do things just like with any other Rust data structure.
-        println!("Please call {} at the number {}", p.name, p.phones[0]);
+        //println!("Please call {} at the number {}", p.name, p.phones[0]);
     }
 
 
     #[test]
     fn load_json_test(){
-        let path = Path::new("resources/1645511997141_M8INRNFV6O_curr.jso");
+        let path = Path::new("resources/1645511997141_M8INRNFV6O_curr.json");
         let data = read_ml_json(&path);
 
         println!("{}", data.element_statistics.nodes.len());
